@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "tfc-clear-pending"
+name = "tfc-cancel-pending"
 version = "0.1.0"
-description = "Clear pending runs in Terraform Cloud"
+description = "Cancel pending runs in a Terraform Cloud workspace"
 authors = ["Jason McVetta <jmcvetta@hey.com>"]
 readme = "README.md"
-packages = [{include = "tfc_clear_pending"}]
+packages = [{include = "tfc_cancel_pending"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"

@@ -16,5 +16,5 @@ Usage
 -----
 
 ```
-./tfc-clear-pending.py [--dry-run] --org ORGANIZATION WORKSPACE_ID
+./tfc-cancel-pending.py [--dry-run] --org ORGANIZATION WORKSPACE_ID
 ```
