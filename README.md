@@ -1,5 +1,7 @@
-tfc-clear-pending
+tfc-cancel-pending
 =================
+
+Script to cancel pending runs on a Terraform Cloud workspace
 
 
 Install
