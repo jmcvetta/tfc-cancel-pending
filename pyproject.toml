@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "tfc-clear-pending"
+version = "0.1.0"
+description = "Clear pending runs in Terraform Cloud"
+authors = ["Jason McVetta <jmcvetta@hey.com>"]
+readme = "README.md"
+packages = [{include = "tfc_clear_pending"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+terrasnek = "^0.1.12"
+structlog = "^22.3.0"
+environs = "^9.5.0"
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.11.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
