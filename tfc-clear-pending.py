@@ -10,9 +10,9 @@ import structlog
 
 @click.command()
 @click.argument("workspace_id")
-@click.option("--org", default="core-strengths-sandbox")
+@click.option("--organization", "-o", default="core-strengths-sandbox")
 @click.option("--dry-run", default=False, is_flag=True)
-def clear(workspace_id: str, org: str, dry_run: bool):
+def clear(workspace_id: str, organization: str, dry_run: bool):
     log = structlog.stdlib.get_logger()
     log = log.bind(dry_run=dry_run)
     # NOTE: Structlog renderer processors can be useful during development when
@@ -27,8 +27,8 @@ def clear(workspace_id: str, org: str, dry_run: bool):
         log.fatal("Environment variable TFC_TOKEN must be set")
         sys.exit(1)
     api = TFC(tfc_token)
-    api.set_org(org)
-    log = log.bind(workspace_id=workspace_id, organization=org)
+    api.set_org(organization)
+    log = log.bind(workspace_id=workspace_id, organization=organization)
 
     log.debug("Deleting all pending runs...")
     filter_pending = {
@@ -37,8 +37,8 @@ def clear(workspace_id: str, org: str, dry_run: bool):
     }
     result = api.runs.list(workspace_id=workspace_id, filters=[filter_pending])
 
+    runs_to_discard = []
     page = 1
-    count = 0
     while True:
         result = api.runs.list(
             workspace_id=workspace_id, filters=[filter_pending], page=page
@@ -50,14 +50,17 @@ def clear(workspace_id: str, org: str, dry_run: bool):
             run_id = run["id"]
             run_status = run["attributes"]["status"]
             assert run_status == "pending" # Sanity check
-            log.debug(f"Discard pending run", run_id=run_id)
-            count += 1
-            if not dry_run:
-                api.runs.cancel(run_id=run_id, payload={
-                    "comment": "Discarded by script tfc-clear-pending.py"
-                })
+            runs_to_discard.append(run_id)
         page += 1
-    log.info("Deleted all pending runs", deleted_count=count)
+
+    if not dry_run:
+        for run_id in runs_to_discard:
+            log.debug(f"Discard pending run", run_id=run_id)
+            api.runs.cancel(run_id=run_id, payload={
+                "comment": "Discarded by script tfc-clear-pending.py"
+            })
+
+    log.info("Deleted all pending runs", deleted_count=len(runs_to_discard))
 
 
 if __name__ == "__main__":
