@@ -22,7 +22,7 @@ poetry install
 Usage
 -----
 
-```console
-$ export TFC_TOKEN=your_terraform_cloud_token
-$ ./tfc-cancel-pending.py [--dry-run] --organization ORGANIZATION WORKSPACE_ID
+```
+export TFC_TOKEN=your_terraform_cloud_token
+./tfc-cancel-pending.py [--dry-run] --organization ORGANIZATION WORKSPACE_ID
 ```
