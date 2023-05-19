@@ -10,9 +10,9 @@ import structlog
 
 @click.command(help="Cancel pending runs on a Terraform Cloud workspace")
 @click.argument("workspace_id")
-@click.option("--organization", "-o", help="Terraform Cloud Organization")
+@click.option("--organization_name", "-o", help="Terraform Cloud Organization")
 @click.option("--dry-run", default=False, is_flag=True)
-def cancel(workspace_id: str, organization: str, dry_run: bool):
+def cancel(workspace_id: str, organization_name: str, dry_run: bool):
     log = structlog.stdlib.get_logger()
     log = log.bind(dry_run=dry_run)
     # NOTE: Structlog renderer processors can be useful during development when
@@ -27,8 +27,8 @@ def cancel(workspace_id: str, organization: str, dry_run: bool):
         log.fatal("Environment variable TFC_TOKEN must be set")
         sys.exit(1)
     api = TFC(tfc_token)
-    api.set_org(organization)
-    log = log.bind(workspace_id=workspace_id, organization=organization)
+    api.set_org(organization_name)
+    log = log.bind(workspace_id=workspace_id, organization=organization_name)
 
     log.debug("Deleting all pending runs...")
     filter_pending = {
