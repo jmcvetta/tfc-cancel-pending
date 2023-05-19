@@ -10,8 +10,8 @@ import structlog
 
 @click.command(help="Cancel pending runs on a Terraform Cloud workspace")
 @click.argument("workspace_id")
-@click.option("--organization", "-o", help="Terraform Cloud Organization")
-@click.option("--dry-run", default=False, is_flag=True)
+@click.argument("organization_name")
+@click.option("--dry-run", default=False, is_flag=True, help="Dry run, no changes will be made to TFC")
 def cancel(workspace_id: str, organization: str, dry_run: bool):
     log = structlog.stdlib.get_logger()
     log = log.bind(dry_run=dry_run)
