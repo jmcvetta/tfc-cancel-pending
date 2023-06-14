@@ -24,5 +24,5 @@ Usage
 
 ```
 export TFC_TOKEN=your_terraform_cloud_token
-./tfc-cancel-pending.py [--dry-run] ORGANIZATION WORKSPACE_ID
+./tfc-cancel-pending.py [--dry-run] ORGANIZATION WORKSPACE_NAME
 ```
