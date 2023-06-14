@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/jmcvetta/tfc-cancel-pending/compare/v2.0.0...v3.0.0) (2023-06-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* Better arguments ([#5](https://github.com/jmcvetta/tfc-cancel-pending/issues/5))
+
+### Features
+
+* Better arguments ([#5](https://github.com/jmcvetta/tfc-cancel-pending/issues/5)) ([abacf78](https://github.com/jmcvetta/tfc-cancel-pending/commit/abacf78fea554509989bf50310d358ac2b55f315))
+
 ## [2.0.0](https://github.com/jmcvetta/tfc-cancel-pending/compare/v1.0.0...v2.0.0) (2023-05-22)
 
 
