@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.2](https://github.com/jmcvetta/tfc-cancel-pending/compare/v4.0.1...v4.0.2) (2023-06-14)
+
+
+### Bug Fixes
+
+* handle case where more than one workspace matches search pattern ([#10](https://github.com/jmcvetta/tfc-cancel-pending/issues/10)) ([e4ae530](https://github.com/jmcvetta/tfc-cancel-pending/commit/e4ae530f80e1e4ca90c1f8baa6e0223129c2ffe3))
+
 ## [4.0.1](https://github.com/jmcvetta/tfc-cancel-pending/compare/v4.0.0...v4.0.1) (2023-06-14)
 
 
