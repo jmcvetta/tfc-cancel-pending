@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/jmcvetta/tfc-cancel-pending/compare/v4.0.0...v4.0.1) (2023-06-14)
+
+
+### Miscellaneous Chores
+
+* new release for upgraded pacakges ([310785e](https://github.com/jmcvetta/tfc-cancel-pending/commit/310785e566372c203d71ff744b085219014f96ef))
+
 ## [4.0.0](https://github.com/jmcvetta/tfc-cancel-pending/compare/v3.0.0...v4.0.0) (2023-06-14)
 
 
