@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/jmcvetta/tfc-cancel-pending/compare/v3.0.0...v4.0.0) (2023-06-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* accept workspace name instead of workspace ID as argument ([#7](https://github.com/jmcvetta/tfc-cancel-pending/issues/7))
+
+### Features
+
+* accept workspace name instead of workspace ID as argument ([#7](https://github.com/jmcvetta/tfc-cancel-pending/issues/7)) ([2047a50](https://github.com/jmcvetta/tfc-cancel-pending/commit/2047a50634aace7682d08f791ceaa79a86318391))
+
 ## [3.0.0](https://github.com/jmcvetta/tfc-cancel-pending/compare/v2.0.0...v3.0.0) (2023-06-14)
 
 
