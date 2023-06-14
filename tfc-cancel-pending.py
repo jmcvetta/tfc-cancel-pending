@@ -31,11 +31,15 @@ def cancel(workspace_name: str, organization_name: str, dry_run: bool):
     log = log.bind(workspace_name=workspace_name, organization=organization_name)
 
     log.debug("Looking up workspace name...")
-    result_data = api.workspaces.list(search={"name": workspace_name}).get('data')
-    if not result_data:
+    result_data = api.workspaces.list(search={"name": workspace_name})['data']
+    workspace_id = None
+    for ws in result_data:
+        if ws['attributes']['name'] == workspace_name:
+            workspace_id = ws['id']
+            break
+    if not workspace_id:
         log.fatal("Workspace not found")
         sys.exit(1)
-    workspace_id = result_data[0]['id']
     log = log.bind(workspace_id=workspace_id)
     log.debug("Found workspace")
 
