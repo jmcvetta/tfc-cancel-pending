@@ -10,9 +10,9 @@ import structlog
 
 @click.command(help="Cancel pending runs on a Terraform Cloud workspace")
 @click.argument("organization_name")
-@click.argument("workspace_id")
+@click.argument("workspace_name")
 @click.option("--dry-run", default=False, is_flag=True)
-def cancel(workspace_id: str, organization_name: str, dry_run: bool):
+def cancel(workspace_name: str, organization_name: str, dry_run: bool):
     log = structlog.stdlib.get_logger()
     log = log.bind(dry_run=dry_run)
     # NOTE: Structlog renderer processors can be useful during development when
@@ -28,7 +28,16 @@ def cancel(workspace_id: str, organization_name: str, dry_run: bool):
         sys.exit(1)
     api = TFC(tfc_token)
     api.set_org(organization_name)
-    log = log.bind(workspace_id=workspace_id, organization=organization_name)
+    log = log.bind(workspace_name=workspace_name, organization=organization_name)
+
+    log.debug("Looking up workspace name...")
+    result_data = api.workspaces.list(search={"name": workspace_name}).get('data')
+    if not result_data:
+        log.fatal("Workspace not found")
+        sys.exit(1)
+    workspace_id = result_data[0]['id']
+    log = log.bind(workspace_id=workspace_id)
+    log.debug("Found workspace")
 
     log.debug("Deleting all pending runs...")
     filter_pending = {
