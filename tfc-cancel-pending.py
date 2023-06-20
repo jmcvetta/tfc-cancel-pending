@@ -43,7 +43,7 @@ def cancel(workspace_name: str, organization_name: str, dry_run: bool):
     log = log.bind(workspace_id=workspace_id)
     log.debug("Found workspace")
 
-    log.debug("Deleting all pending runs...")
+    log.debug("Querying pending runs...")
     filter_pending = {
         "keys": ["status"],
         "value": "pending",
@@ -66,6 +66,7 @@ def cancel(workspace_name: str, organization_name: str, dry_run: bool):
             runs_to_discard.append(run_id)
         page += 1
 
+    log.debug("Deleting all pending runs...", count=len(runs_to_discard))
     if not dry_run:
         for run_id in runs_to_discard:
             log.debug(f"Discard pending run", run_id=run_id)
@@ -73,7 +74,7 @@ def cancel(workspace_name: str, organization_name: str, dry_run: bool):
                 "comment": "Discarded by script tfc-cancel-pending.py"
             })
 
-    log.info("Deleted all pending runs", deleted_count=len(runs_to_discard))
+    log.info("Deleted all pending runs", count=len(runs_to_discard))
 
 
 if __name__ == "__main__":
