@@ -23,6 +23,12 @@ Usage
 -----
 
 ```
-export TFC_TOKEN=your_terraform_cloud_token
 ./tfc-cancel-pending.py [--dry-run] ORGANIZATION WORKSPACE_NAME
 ```
+
+If you already have the Terraform CLI authorized with Terraform
+Cloud, `tfc-cancel-pending` will automatically read your TFC API token from the
+Terraform CLI's credentials file.
+
+Otherwise, you must populate environment variable `TFC_TOKEN` with your
+Terraform Cloud API token.
