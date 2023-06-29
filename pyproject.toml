@@ -16,6 +16,9 @@ click = "^8.1.3"
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.11.0"
 
+[tool.poetry.scripts]
+tfc-cancel-pending = "tfc_cancel_pending.script:main"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
