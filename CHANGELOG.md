@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/jmcvetta/tfc-cancel-pending/compare/v4.0.2...v4.1.0) (2023-06-29)
+
+
+### Features
+
+* Read TFC token from TFC credentials file ([#14](https://github.com/jmcvetta/tfc-cancel-pending/issues/14)) ([97dfe4b](https://github.com/jmcvetta/tfc-cancel-pending/commit/97dfe4b94c7d56f36f8b5706adfaf8016c889c67))
+
 ## [4.0.2](https://github.com/jmcvetta/tfc-cancel-pending/compare/v4.0.1...v4.0.2) (2023-06-14)
 
 
