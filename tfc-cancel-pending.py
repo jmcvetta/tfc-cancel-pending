@@ -12,7 +12,7 @@ import structlog
 @click.argument("organization_name")
 @click.argument("workspace_name")
 @click.option("--dry-run", default=False, is_flag=True)
-def cancel(workspace_name: str, organization_name: str, dry_run: bool):
+def main(workspace_name: str, organization_name: str, dry_run: bool):
     log = structlog.stdlib.get_logger()
     log = log.bind(dry_run=dry_run)
     # NOTE: Structlog renderer processors can be useful during development when
@@ -78,4 +78,4 @@ def cancel(workspace_name: str, organization_name: str, dry_run: bool):
 
 
 if __name__ == "__main__":
-    cancel()
+    main()
