@@ -1,15 +1,14 @@
 #!/bin/env python3
-import logging
+import json
 import os.path
 import sys
-
-import environs
-import click
-from terrasnek.api import TFC
-import structlog
 from typing import Optional
-import json
+
+import click
+import environs
+import structlog
 from structlog.stdlib import BoundLogger
+from terrasnek.api import TFC
 
 
 def read_token_from_credentials(log: BoundLogger) -> Optional[str]:
