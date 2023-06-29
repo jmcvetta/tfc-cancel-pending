@@ -15,7 +15,8 @@ from structlog.stdlib import BoundLogger
 def read_token_from_credentials(log: BoundLogger) -> Optional[str]:
     """
     Read TFC token from TFC credentials file
-    :return:
+
+    :return: Terraform Cloud API token
     """
     file_path: str = os.path.expanduser("~/.terraform.d/credentials.tfrc.json")
 
