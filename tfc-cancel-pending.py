@@ -1,18 +1,44 @@
 #!/bin/env python3
 import logging
+import os.path
 import sys
 
 import environs
 import click
 from terrasnek.api import TFC
 import structlog
+from typing import Optional
+import json
+from structlog.stdlib import BoundLogger
+
+
+def read_token_from_credentials(log: BoundLogger) -> Optional[str]:
+    """
+    Read TFC token from TFC credentials file
+    :return:
+    """
+    file_path: str = os.path.expanduser("~/.terraform.d/credentials.tfrc.json")
+
+    try:
+        with open(file_path, 'r') as file:
+            data: dict = json.load(file)
+            token: str = data['credentials']['app.terraform.io']['token']
+            log.debug("Successfully read token from TFC credentials file")
+            return token
+    except FileNotFoundError:
+        log.debug("Could not find TFC credentials file", file_path=file_path)
+    except (KeyError, json.JSONDecodeError):
+        log.warn("TFC credentials file was found, but does not contain expected format")
+    except Exception as e:
+        log.fatal(f"Unexpected error: {str(e)}")
+        sys.exit(-1)
 
 
 @click.command(help="Cancel pending runs on a Terraform Cloud workspace")
 @click.argument("organization_name")
 @click.argument("workspace_name")
 @click.option("--dry-run", default=False, is_flag=True)
-def main(workspace_name: str, organization_name: str, dry_run: bool):
+def main(workspace_name: str, organization_name: str, dry_run: bool) -> None:
     log = structlog.stdlib.get_logger()
     log = log.bind(dry_run=dry_run)
     # NOTE: Structlog renderer processors can be useful during development when
@@ -20,12 +46,15 @@ def main(workspace_name: str, organization_name: str, dry_run: bool):
     # processors = [structlog.processors.JSONRenderer(indent=2, sort_keys=True)]
     # structlog.configure(processors=processors)
 
-    env = environs.Env()
-    try:
-        tfc_token = env.str("TFC_TOKEN")
-    except environs.EnvError:
-        log.fatal("Environment variable TFC_TOKEN must be set")
-        sys.exit(1)
+    tfc_token = read_token_from_credentials(log)
+    if not tfc_token:
+        env = environs.Env()
+        try:
+            tfc_token = env.str("TFC_TOKEN")
+        except environs.EnvError:
+            log.fatal("TFC credentials file not found and environment variable TFC_TOKEN not set")
+            sys.exit(1)
+
     api = TFC(tfc_token)
     api.set_org(organization_name)
     log = log.bind(workspace_name=workspace_name, organization=organization_name)
