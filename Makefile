@@ -1,23 +1,21 @@
 .PHONY: cancel
 cancel:
-	@if [ -z "$(ORG)" ]; then \
-		echo "Error: ORG is not set. Usage: make cancel ORG=<organization> WORKSPACE=<workspace>"; \
-		exit 1; \
-	fi
-	@if [ -z "$(WORKSPACE)" ]; then \
-		echo "Error: WORKSPACE is not set. Usage: make cancel ORG=<organization> WORKSPACE=<workspace>"; \
+	@if [ -z "$(ORG)" ] || [ -z "$(WORKSPACE)" ]; then \
+		echo "Usage: make cancel ORG=<organization> WORKSPACE=<workspace>"; \
+		echo ""; \
+		echo "Example:"; \
+		echo "  make cancel ORG=my-org WORKSPACE=my-workspace"; \
 		exit 1; \
 	fi
 	uv run python tfc-cancel-pending.py $(ORG) $(WORKSPACE)
 
 .PHONY: cancel-dry-run
 cancel-dry-run:
-	@if [ -z "$(ORG)" ]; then \
-		echo "Error: ORG is not set. Usage: make cancel-dry-run ORG=<organization> WORKSPACE=<workspace>"; \
-		exit 1; \
-	fi
-	@if [ -z "$(WORKSPACE)" ]; then \
-		echo "Error: WORKSPACE is not set. Usage: make cancel-dry-run ORG=<organization> WORKSPACE=<workspace>"; \
+	@if [ -z "$(ORG)" ] || [ -z "$(WORKSPACE)" ]; then \
+		echo "Usage: make cancel-dry-run ORG=<organization> WORKSPACE=<workspace>"; \
+		echo ""; \
+		echo "Example:"; \
+		echo "  make cancel-dry-run ORG=my-org WORKSPACE=my-workspace"; \
 		exit 1; \
 	fi
 	uv run python tfc-cancel-pending.py $(ORG) $(WORKSPACE) --dry-run
