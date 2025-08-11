@@ -14,16 +14,54 @@ yourself in the foot.  Be careful!
 Install
 -------
 
+### For development
+
+```bash
+# Install dependencies using uv
+uv sync
 ```
-poetry install
+
+### As a package
+
+```bash
+# Install from current directory
+pip install .
+
+# Or with uv
+uv pip install .
 ```
+
+After installation as a package, the `tfc-cancel-pending` command will be available system-wide.
 
 
 Usage
 -----
 
+### Using Make (recommended)
+
+```bash
+# Cancel pending runs
+make cancel <organization> <workspace>
+
+# Dry run (see what would be cancelled without actually cancelling)
+make cancel-dry-run <organization> <workspace>
+
+# Show help
+make help
 ```
-./tfc-cancel-pending.py [--dry-run] ORGANIZATION WORKSPACE_NAME
+
+### Direct script usage
+
+```bash
+# Using the console command (recommended)
+uv run tfc-cancel-pending <organization> <workspace> [--dry-run]
+
+# Or run the script directly
+uv run python tfc_cancel_pending.py <organization> <workspace> [--dry-run]
+
+# Or make the script executable
+chmod +x tfc_cancel_pending.py
+./tfc_cancel_pending.py <organization> <workspace> [--dry-run]
 ```
 
 If you already have the Terraform CLI authorized with Terraform
