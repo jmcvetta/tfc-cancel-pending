@@ -14,16 +14,37 @@ yourself in the foot.  Be careful!
 Install
 -------
 
-```
-poetry install
+```bash
+# Install dependencies using uv
+uv sync
 ```
 
 
 Usage
 -----
 
+### Using Make (recommended)
+
+```bash
+# Cancel pending runs
+make cancel <organization> <workspace>
+
+# Dry run (see what would be cancelled without actually cancelling)
+make cancel-dry-run <organization> <workspace>
+
+# Show help
+make help
 ```
-./tfc-cancel-pending.py [--dry-run] ORGANIZATION WORKSPACE_NAME
+
+### Direct script usage
+
+```bash
+# Using uv run
+uv run python tfc-cancel-pending.py <organization> <workspace> [--dry-run]
+
+# Or make the script executable
+chmod +x tfc-cancel-pending.py
+./tfc-cancel-pending.py <organization> <workspace> [--dry-run]
 ```
 
 If you already have the Terraform CLI authorized with Terraform
