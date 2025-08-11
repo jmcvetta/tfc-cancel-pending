@@ -12,13 +12,13 @@ dependencies = [
     "click>=8.1.3",
 ]
 
+[project.scripts]
+tfc-cancel-pending = "tfc_cancel_pending:main"
+
 [tool.uv]
 dev-dependencies = [
     "ipython>=8.11.0",
 ]
-
-[tool.hatch.build.targets.wheel]
-include = ["tfc-cancel-pending.py"]
 
 [build-system]
 requires = ["hatchling"]

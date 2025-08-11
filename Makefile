@@ -8,7 +8,7 @@ cancel:
 		echo "  make cancel my-org my-workspace"; \
 		exit 1; \
 	fi
-	@uv run python tfc-cancel-pending.py $(word 2,$(MAKECMDGOALS)) $(word 3,$(MAKECMDGOALS))
+	@uv run python tfc_cancel_pending.py $(word 2,$(MAKECMDGOALS)) $(word 3,$(MAKECMDGOALS))
 
 .PHONY: cancel-dry-run
 cancel-dry-run:
@@ -19,7 +19,7 @@ cancel-dry-run:
 		echo "  make cancel-dry-run my-org my-workspace"; \
 		exit 1; \
 	fi
-	@uv run python tfc-cancel-pending.py $(word 2,$(MAKECMDGOALS)) $(word 3,$(MAKECMDGOALS)) --dry-run
+	@uv run python tfc_cancel_pending.py $(word 2,$(MAKECMDGOALS)) $(word 3,$(MAKECMDGOALS)) --dry-run
 
 # Catch-all target to prevent "No rule to make target" errors
 %:
