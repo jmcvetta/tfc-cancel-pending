@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/jmcvetta/tfc-cancel-pending/compare/v4.1.0...v5.0.0) (2025-08-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* Migrate from Poetry to uv ([#16](https://github.com/jmcvetta/tfc-cancel-pending/issues/16))
+
+### Features
+
+* Migrate from Poetry to uv ([#16](https://github.com/jmcvetta/tfc-cancel-pending/issues/16)) ([fe84fcb](https://github.com/jmcvetta/tfc-cancel-pending/commit/fe84fcb5deb75ae320e404d36b9aa21fd72ae79e))
+
 ## [4.1.0](https://github.com/jmcvetta/tfc-cancel-pending/compare/v4.0.2...v4.1.0) (2023-06-29)
 
 
