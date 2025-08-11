@@ -53,7 +53,10 @@ make help
 ### Direct script usage
 
 ```bash
-# Using uv run
+# Using the console command (recommended)
+uv run tfc-cancel-pending <organization> <workspace> [--dry-run]
+
+# Or run the script directly
 uv run python tfc_cancel_pending.py <organization> <workspace> [--dry-run]
 
 # Or make the script executable
